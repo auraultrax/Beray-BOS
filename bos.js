@@ -7,13 +7,21 @@
  function showHome(){stage.classList.remove('open');frame.src='about:blank';}
  window.addEventListener('message',e=>{
    if(e.source!==document.querySelector('#lockStage iframe')?.contentWindow && e.source!==frame.contentWindow)return;
-   if(e.data?.type==='BERAY_UNLOCK'){lock.style.display='none';notify('Beray hazır. Hoş geldin.');}
+   if(e.data?.type==='BERAY_UNLOCK'){
+     lock.style.display='block';lock.style.visibility='hidden';lock.style.pointerEvents='none';
+     lock.querySelector('iframe').contentWindow.postMessage({type:'BERAY_SET_UNLOCKED'},location.origin);
+     notify('Beray hazır. Hoş geldin.');
+   }
+   if(e.data?.type==='BERAY_CONTROL_CLOSE'){lock.style.visibility='hidden';lock.style.pointerEvents='none';}
    if(e.data?.type==='BERAY_GO_HOME')showHome();
    if(e.data?.type==='BERAY_OPEN_CENTER')openPage('index4.html');
  });
  document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>openPage(b.dataset.page)));
  $('#appBack').addEventListener('click',showHome);
- $('#lockNow').addEventListener('click',()=>{stage.classList.remove('open');lock.style.display='block';lock.querySelector('iframe').contentWindow.location.reload();});
+ $('#lockNow').addEventListener('click',()=>{stage.classList.remove('open');frame.src='about:blank';lock.style.display='block';lock.style.visibility='visible';lock.style.pointerEvents='auto';lock.querySelector('iframe').contentWindow.postMessage({type:'BERAY_RELOCK'},location.origin);});
+ let homeStartY=0,homeStartX=0;
+ document.addEventListener('touchstart',e=>{if(stage.classList.contains('open')||lock.style.visibility!=='hidden')return;const t=e.touches[0];homeStartY=t.clientY;homeStartX=t.clientX;},{passive:true});
+ document.addEventListener('touchend',e=>{if(stage.classList.contains('open')||lock.style.visibility!=='hidden')return;const t=e.changedTouches[0];if(homeStartY>window.innerHeight*.65&&homeStartY-t.clientY>65&&Math.abs(t.clientX-homeStartX)<90){lock.style.visibility='visible';lock.style.pointerEvents='auto';lock.querySelector('iframe').contentWindow.postMessage({type:'BERAY_OPEN_CONTROL'},location.origin);}},{passive:true});
  function tick(){const d=new Date();$('#homeClock').textContent=d.toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'})+' · '+d.toLocaleDateString('tr-TR',{day:'numeric',month:'short'});}
  tick();setInterval(tick,15000);
  function installed(){try{return JSON.parse(localStorage.getItem('beray-installed')||'[]')}catch{return[]}}
