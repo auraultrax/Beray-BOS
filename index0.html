@@ -18,8 +18,10 @@ function tick(){const d=new Date();time.textContent=d.toLocaleTimeString('tr-TR'
 tick();setInterval(tick,1000);
 function toast(s){const t=document.getElementById('toast');t.textContent=s;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600)}
 function parentSend(type){try{parent.postMessage({type},location.origin)}catch{parent.postMessage({type},'*')}}
-let unlocked=false;\nfunction showControl(){control.classList.add('open')}function hideControl(){control.classList.remove('open');if(unlocked)parentSend('BERAY_CONTROL_CLOSE')}
-document.getElementById('closeControl').onclick=hideControl;\nwindow.addEventListener('message',e=>{if(e.source!==parent)return;if(e.data?.type==='BERAY_SET_UNLOCKED'){unlocked=true;document.body.classList.add('unlocked');document.getElementById('airplane').disabled=false;}if(e.data?.type==='BERAY_OPEN_CONTROL'){unlocked=true;document.body.classList.add('unlocked');document.getElementById('airplane').disabled=false;document.getElementById('lock').style.display='none';showControl();}if(e.data?.type==='BERAY_RELOCK'){unlocked=false;document.body.classList.remove('unlocked');document.getElementById('airplane').disabled=true;hideControl();document.getElementById('lock').style.display='flex';}});
+let unlocked=false;
+function showControl(){control.classList.add('open')}function hideControl(){control.classList.remove('open');if(unlocked)parentSend('BERAY_CONTROL_CLOSE')}
+document.getElementById('closeControl').onclick=hideControl;
+window.addEventListener('message',e=>{if(e.source!==parent)return;if(e.data?.type==='BERAY_SET_UNLOCKED'){unlocked=true;document.body.classList.add('unlocked');document.getElementById('airplane').disabled=false;}if(e.data?.type==='BERAY_OPEN_CONTROL'){unlocked=true;document.body.classList.add('unlocked');document.getElementById('airplane').disabled=false;document.getElementById('lock').style.display='none';showControl();}if(e.data?.type==='BERAY_RELOCK'){unlocked=false;document.body.classList.remove('unlocked');document.getElementById('airplane').disabled=true;hideControl();document.getElementById('lock').style.display='flex';}});
 let startY=0,startX=0;
 function start(e){const t=e.touches?e.touches[0]:e;startY=t.clientY;startX=t.clientX}
 function end(e){const t=e.changedTouches?e.changedTouches[0]:e;const dy=t.clientY-startY;if(Math.abs(dy)<60||Math.abs(t.clientX-startX)>90)return;if(control.classList.contains('open')){if(dy< -45)hideControl();return;}if(dy< -45)showControl();else if(dy>45)parentSend('BERAY_UNLOCK')}
