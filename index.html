@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#080d16"><title>Beray Intelligence</title><link rel="stylesheet" href="bos.css"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.0"></script><script src="supabase-config.js"></script></head>
+<body>
+<div id="boot"><div class="boot-content"><div class="brand-mark">Beray</div><div class="boot-sub">Beray Hazırlanıyor</div><div class="boot-line"><i></i></div><div class="boot-intel">Beray Intelligence</div></div></div>
+<div class="shell" id="home">
+ <header class="topbar"><div class="wordmark">Beray<span>.</span></div><div class="clockline" id="homeClock">--:--</div></header>
+ <section class="welcome"><div class="eyebrow">BERAY INTELLIGENCE</div><h1>Merhaba.<br>Hoş geldin.</h1><p>Tek bir merkez. Sana ait uygulamalar. Beray'ın yeni nesil deneyimine hoş geldin.</p></section>
+ <input class="search" id="appSearch" placeholder="Uygulama veya alan adı ara…" autocomplete="off">
+ <div class="section-head"><h2>Uygulamalar</h2><small>Beray çekirdeği</small></div>
+ <div class="app-grid" id="coreApps">
+  <button class="app-tile" data-page="index1.html"><div class="app-letter">M</div><b>Mail</b></button>
+  <button class="app-tile" data-page="index2.html"><div class="app-letter">C</div><b>Telefon</b></button>
+  <button class="app-tile" data-page="index3.html"><div class="app-letter">A</div><b>Beray AI</b></button>
+  <button class="app-tile" data-page="index4.html"><div class="app-letter">H</div><b>Merkez</b></button>
+ </div>
+ <div class="section-head"><h2>Eklediklerim</h2><small id="installedCount">0 uygulama</small></div>
+ <div class="custom-apps" id="installedApps"><p style="color:#8da0b9;font-size:13px;grid-column:1/-1">BSTORE'dan eklediğin uygulamalar burada görünecek.</p></div>
+ <div class="home-module"><div class="section-head"><h2>Beray Alanı</h2><small>Hızlı erişim</small></div><div class="mcah">
+ <button data-page="index1.html">M<span>Mail</span></button><button data-page="index2.html">C<span>Telefon</span></button><button data-page="index3.html">A<span>AI</span></button><button data-page="index4.html">H<span>Merkez</span></button></div><div class="home-footer"><span>BERAY INTELLIGENCE</span><button id="lockNow" style="background:none;color:inherit">Ekranı kilitle</button></div></div>
+</div>
+<div id="lockStage"><iframe title="Beray kilit ekranı" src="index0.html"></iframe></div>
+<div id="appStage"><iframe id="appFrame" title="Beray uygulaması"></iframe></div>
+<div class="toast" id="toast"></div>
+<script src="bos.js"></script>
+</body></html>
