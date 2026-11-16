@@ -11,3 +11,11 @@
 .custom-result{display:flex;align-items:center;gap:10px;background:#111e2e;border:1px solid var(--line);border-radius:17px;padding:11px;min-width:0}
 .custom-result .app-letter{width:40px;height:40px;flex:0 0 40px}.custom-result-meta{min-width:0;flex:1}.custom-result-meta strong{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.custom-result-meta small{display:block;color:var(--muted);font-size:10px;margin-top:4px}.custom-result-actions{display:flex;flex-direction:column;gap:5px}
 .mini-action{font-size:10px;border:1px solid #38516c;border-radius:8px;background:#15283b;padding:6px 8px;white-space:nowrap}.mini-action.primary{background:#17444b;border-color:#357e7a}.mini-action:disabled{opacity:.5;cursor:default}
+
+/* Beray M/C/A/H kare uygulama paneli */
+.home-module{margin-top:auto;padding-top:26px;display:flex;flex-direction:column;align-items:center}
+.home-module .section-head{width:100%;max-width:360px}
+.core-dock{width:min(224px,66vw);aspect-ratio:1;margin:0 auto;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:11px;border:1px solid #30445b;border-radius:26px;background:linear-gradient(145deg,#152a3d,#0d1725);box-shadow:0 18px 48px #0005}
+.core-dock .app-tile{min-height:0;height:100%;padding:8px 4px;border-radius:18px}
+.core-dock .app-letter{width:48px;height:48px;border-radius:15px}
+.home-footer{width:100%}
