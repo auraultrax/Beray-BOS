@@ -32,7 +32,7 @@
    host.innerHTML='';list.forEach(item=>{const b=document.createElement('button');b.className='custom-app';b.innerHTML='<span class="app-letter"></span><span><strong></strong><small></small></span>';b.querySelector('.app-letter').textContent=(item.project_name||'B').slice(0,1).toUpperCase();b.querySelector('strong').textContent=item.project_name||item.slug;b.querySelector('small').textContent='Sürüm '+(item.version||'1.0');b.onclick=()=>openPublished(item);host.appendChild(b);});
  }
  async function loadApps(){
-   try{const {data,error}=await window.beraySupabase.from('beray_publications').select('id,kind,slug,project_name,version,public_base_url').eq('is_active',true).order('project_name');if(error)throw error;publications=data||[];}catch(e){console.warn('Beray katalog:',e.message);}
+   try{const {data,error}=await window.beraySupabase.from('beray_publications').select('id,kind,slug,project_name,version,public_base_url').eq('is_active',true).order('project_name');if(error)throw error;publications=data||[];const saved=installed().map(old=>publications.find(item=>item.id===old.id)||old);localStorage.setItem('beray-installed',JSON.stringify(saved));renderInstalled();const term=$('#appSearch').value.trim().toLowerCase();if(term)renderResults(term);}catch(e){console.warn('Beray katalog:',e.message);}
  }
  function renderResults(term){
    const host=$('#installedApps');if(!term){renderInstalled();document.querySelectorAll('#coreApps .app-tile').forEach(x=>x.style.display='flex');return;}
