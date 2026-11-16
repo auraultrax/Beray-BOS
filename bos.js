@@ -2,7 +2,7 @@
  const $=s=>document.querySelector(s),toast=$('#toast'),lock=$('#lockStage'),stage=$('#appStage'),frame=$('#appFrame');
  let publications=[];
  function notify(message){toast.textContent=message;toast.classList.add('show');clearTimeout(notify.t);notify.t=setTimeout(()=>toast.classList.remove('show'),2600);}
- function openPage(page){const builtIn=/^index[1-4]\\.html(?:[?#]|$)/.test(page);frame.setAttribute('sandbox',builtIn?'allow-scripts allow-forms allow-same-origin allow-popups':'allow-scripts allow-forms allow-pointer-lock allow-popups allow-downloads');frame.src=page;stage.classList.add('open');}
+ function openPage(page){const builtIn=/^index[1-4]\.html(?:[?#]|$)/.test(page);frame.setAttribute('sandbox',builtIn?'allow-scripts allow-forms allow-same-origin allow-popups':'allow-scripts allow-forms allow-pointer-lock allow-popups allow-downloads');frame.src=page;stage.classList.add('open');}
  function openPublished(row){if(!row||!row.public_base_url){notify('Uygulama henüz yayımlanmamış.');return;}openPage(row.public_base_url);}
  function showHome(){stage.classList.remove('open');frame.src='about:blank';}
  window.addEventListener('message',e=>{
