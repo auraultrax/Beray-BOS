@@ -8,7 +8,8 @@
  window.addEventListener('message',e=>{
    if(e.source!==document.querySelector('#lockStage iframe')?.contentWindow && e.source!==frame.contentWindow)return;
    if(e.data?.type==='BERAY_UNLOCK'){lock.style.display='none';notify('Beray hazır. Hoş geldin.');}
-   if(e.data?.type==='BERAY_GO_HOME')showHome();\n   if(e.data?.type==='BERAY_OPEN_CENTER')openPage('index4.html');
+   if(e.data?.type==='BERAY_GO_HOME')showHome();
+   if(e.data?.type==='BERAY_OPEN_CENTER')openPage('index4.html');
  });
  document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>openPage(b.dataset.page)));
  $('#appBack').addEventListener('click',showHome);
