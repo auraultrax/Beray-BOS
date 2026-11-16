@@ -28,7 +28,7 @@ function end(e){const t=e.changedTouches?e.changedTouches[0]:e;const dy=t.client
 lock.addEventListener('touchstart',start,{passive:true});lock.addEventListener('touchend',end,{passive:true});lock.addEventListener('mousedown',start);lock.addEventListener('mouseup',end);
 document.querySelectorAll('[data-radio]').forEach(b=>b.addEventListener('click',async()=>{
  const radio=b.dataset.radio;if(radio==='airplane'&&!unlocked){toast('Uçak modu kilit ekranında kullanılamaz.');return;}
- const bridge=window.berayHardware;if(!bridge){toast('Beray donanım sürücüsü bağlı değil. Bu ekrandan Android ayarları açılmaz.');return;}
+ const bridge=window.berayHardware||parent.berayHardware;if(!bridge){toast('Beray donanım sürücüsü bağlı değil. Bu ekrandan Android ayarları açılmaz.');return;}
  try{let result;if(radio==='wifi'&&bridge.scanWifi){result=await bridge.scanWifi();toast(Array.isArray(result)?(result.length+' Wi-Fi ağı bulundu'):'Wi-Fi taraması tamamlandı');}
  else if(radio==='bluetooth'&&bridge.scanBluetooth){result=await bridge.scanBluetooth();toast('Bluetooth taraması tamamlandı');}
  else if(bridge.toggleRadio){result=await bridge.toggleRadio(radio);b.classList.toggle('active',!!result);toast((b.querySelector('strong').textContent)+(result?' açıldı':' kapatıldı'));}
