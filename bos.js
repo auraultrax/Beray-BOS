@@ -10,7 +10,8 @@
    if(e.data?.type==='BERAY_UNLOCK'){lock.style.display='none';notify('Beray hazır. Hoş geldin.');}
    if(e.data?.type==='BERAY_GO_HOME')showHome();
  });
- document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>openPage(b.dataset.page)));\n $('#appBack').addEventListener('click',showHome);
+ document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>openPage(b.dataset.page)));
+ $('#appBack').addEventListener('click',showHome);
  $('#lockNow').addEventListener('click',()=>{stage.classList.remove('open');lock.style.display='block';lock.querySelector('iframe').contentWindow.location.reload();});
  function tick(){const d=new Date();$('#homeClock').textContent=d.toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'})+' · '+d.toLocaleDateString('tr-TR',{day:'numeric',month:'short'});}
  tick();setInterval(tick,15000);
