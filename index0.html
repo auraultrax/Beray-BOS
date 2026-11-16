@@ -1,6 +1,6 @@
 <!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#080d16"><title>Beray Kilit Ekranı</title><link rel="stylesheet" href="bos.css"><style>
 body.unlocked{background:transparent}body.unlocked .lock{display:none}.lock{height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;text-align:center;overflow:hidden;padding:28px;background:radial-gradient(ellipse at 50% 30%,#17374b,transparent 55%),linear-gradient(160deg,#080d16,#0a1421)}.lock-brand{position:absolute;top:calc(env(safe-area-inset-top) + 25px);font:700 18px 'Space Grotesk';letter-spacing:2px}.lock-brand span{color:var(--cyan)}.lock-time{font:500 clamp(72px,20vw,112px)/1 'Space Grotesk';letter-spacing:-7px}.lock-date{color:#bfd0e2;font-size:16px;margin-top:14px}.lock-bottom{position:absolute;bottom:calc(env(safe-area-inset-bottom) + 26px);display:grid;justify-items:center;gap:12px;color:#91a8c0;font-size:12px}.gesture-bar{width:44px;height:4px;border-radius:10px;background:#7890a9;opacity:.85}.lock-hint{font-size:13px;color:#b5c8dd}.lock-icon{width:48px;height:48px;border:1px solid #38536c;border-radius:17px;display:grid;place-items:center;margin-bottom:28px;background:#14263a;color:var(--cyan);font-size:20px}
-#control{position:fixed;inset:0;z-index:5;background:rgba(4,9,16,.97);backdrop-filter:blur(22px);padding:calc(env(safe-area-inset-top) + 30px) 22px calc(env(safe-area-inset-bottom) + 24px);transform:translateY(-105%);transition:transform .42s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column}#control.open{transform:translateY(0)}.cc-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}.cc-head h2{font:600 25px 'Space Grotesk';margin:0}.cc-head button{background:#17283b;border:1px solid #30455e;border-radius:50%;width:39px;height:39px;font-size:18px}.cc-status{color:#91a7bf;font-size:12px;margin:-14px 0 22px}.cc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.cc-tile{min-height:112px;text-align:left;padding:16px;border-radius:21px;border:1px solid #2c435c;background:linear-gradient(145deg,#172a40,#101b2b);display:flex;flex-direction:column;justify-content:space-between}.cc-tile:disabled{opacity:.35;cursor:not-allowed}.cc-icon{font-size:23px}.cc-tile strong{font-size:14px}.cc-tile small{color:#9ab0c8;font-size:11px}.cc-tile.active{border-color:var(--cyan);background:linear-gradient(145deg,#16404b,#102b37)}.cc-footer{margin-top:auto;color:#7890a8;font-size:11px;line-height:1.5}.cc-dot{width:7px;height:7px;border-radius:50%;background:#ffbd62;display:inline-block;margin-right:6px}
+#control{position:fixed;inset:0;z-index:5;background:rgba(4,9,16,.97);backdrop-filter:blur(22px);padding:calc(env(safe-area-inset-top) + 30px) 22px calc(env(safe-area-inset-bottom) + 24px);transform:translateY(-105%);transition:transform .42s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column}#control.open{transform:translateY(0)}.cc-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}.cc-head h2{font:600 25px 'Space Grotesk';margin:0}.cc-head button{background:#17283b;border:1px solid #30455e;border-radius:50%;width:39px;height:39px;font-size:18px}.cc-status{color:#91a7bf;font-size:12px;margin:-14px 0 22px}.cc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.cc-tile{min-height:112px;text-align:left;padding:16px;border-radius:21px;border:1px solid #2c435c;background:linear-gradient(145deg,#172a40,#101b2b);display:flex;flex-direction:column;justify-content:space-between}.cc-tile:disabled{opacity:.35;cursor:not-allowed}.cc-icon{font-size:23px}.cc-tile strong{font-size:14px}.cc-tile small{color:#9ab0c8;font-size:11px}.cc-tile.active{border-color:var(--cyan);background:linear-gradient(145deg,#16404b,#102b37)}.cc-footer{margin-top:auto;color:#7890a8;font-size:11px;line-height:1.5}.cc-dot{width:7px;height:7px;border-radius:50%;background:#ffbd62;display:inline-block;margin-right:6px}#control{overflow-y:auto}.scan-results{margin-top:14px;padding:13px 14px;border:1px solid #2c435c;border-radius:16px;background:#0b1725;color:#e6f1fb;font-size:12px}.scan-results strong{display:block;margin-bottom:8px;color:var(--cyan)}.scan-row{padding:8px 0;border-top:1px solid #23384c;color:#b9cbe0}.scan-empty{color:#91a7bf}
 </style></head><body><main class="lock" id="lock">
 <div class="lock-brand">‹────── <span>BERAY</span> ──────›</div><div class="lock-icon">✧</div><div class="lock-time" id="time">--:--</div><div class="lock-date" id="date">--</div><div class="lock-bottom"><div class="lock-hint">Ana ekrana geçmek için aşağı kaydır</div><div class="gesture-bar"></div><div>Denetim merkezi için yukarı kaydır</div></div></main>
 <section id="control" aria-label="Beray denetim merkezi"><header class="cc-head"><h2>Denetim Merkezi</h2><button id="closeControl" aria-label="Kapat">×</button></header><div class="cc-status">Beray donanım katmanı</div>
@@ -11,7 +11,7 @@ body.unlocked{background:transparent}body.unlocked .lock{display:none}.lock{heig
 <button class="cc-tile" data-radio="mobileData"><span class="cc-icon">▥</span><strong>Mobil veri</strong><small>Hücresel bağlantı</small></button>
 <button class="cc-tile" data-radio="airplane" id="airplane" disabled><span class="cc-icon">✈</span><strong>Uçak modu</strong><small>Yalnızca açık ekranda</small></button>
 <button class="cc-tile" data-radio="hotspot"><span class="cc-icon">⌁</span><strong>Erişim noktası</strong><small>Bağlantı paylaşımı</small></button>
-</div><footer class="cc-footer"><span class="cc-dot"></span>Donanım işlemleri Beray OS sürücü hizmetiyle yürütülür. Bu arayüz Android ayarlarına yönlendirme yapmaz. Uçak modu kilit ekranında devre dışıdır.</footer></section><div class="toast" id="toast"></div>
+</div><div id="scanResults" class="scan-results hidden" aria-live="polite"></div><footer class="cc-footer"><span class="cc-dot"></span>Donanım işlemleri Beray OS sürücü hizmetiyle yürütülür. Bu arayüz Android ayarlarına yönlendirme yapmaz. Uçak modu kilit ekranında devre dışıdır.</footer></section><div class="toast" id="toast"></div>
 <script>
 const time=document.getElementById('time'),date=document.getElementById('date'),control=document.getElementById('control'),lock=document.getElementById('lock');
 function tick(){const d=new Date();time.textContent=d.toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'});date.textContent=d.toLocaleDateString('tr-TR',{weekday:'long',day:'numeric',month:'long'});}
@@ -20,6 +20,21 @@ function toast(s){const t=document.getElementById('toast');t.textContent=s;t.cla
 function parentSend(type){try{parent.postMessage({type},location.origin)}catch{parent.postMessage({type},'*')}}
 let unlocked=false;
 function showControl(){control.classList.add('open')}function hideControl(){control.classList.remove('open');if(unlocked)parentSend('BERAY_CONTROL_CLOSE')}
+function showScanResults(kind,items){
+ const host=document.getElementById('scanResults');host.innerHTML='';
+ const title=document.createElement('strong');
+ title.textContent=kind==='wifi'?'Yakındaki Wi-Fi ağları':'Yakındaki Bluetooth cihazları';
+ host.appendChild(title);
+ const rows=Array.isArray(items)?items.slice(0,30):[];
+ if(!rows.length){const empty=document.createElement('div');empty.className='scan-empty';empty.textContent='Yakında listelenecek cihaz bulunamadı.';host.appendChild(empty);}
+ rows.forEach(item=>{
+   const line=document.createElement('div');line.className='scan-row';
+   const name=typeof item==='string'?item:(kind==='wifi'?(item?.ssid||item?.name||'Adsız ağ'):(item?.name||item?.id||'Adsız cihaz'));
+   const signal=typeof item==='object'&&item&&Number.isFinite(Number(item.signal))?' · '+item.signal+' dBm':'';
+   line.textContent=String(name)+signal;host.appendChild(line);
+ });
+ host.classList.remove('hidden');
+}
 document.getElementById('closeControl').onclick=hideControl;
 window.addEventListener('message',e=>{if(e.source!==parent)return;if(e.data?.type==='BERAY_SET_UNLOCKED'){unlocked=true;document.body.classList.add('unlocked');document.getElementById('airplane').disabled=false;}if(e.data?.type==='BERAY_OPEN_CONTROL'){unlocked=true;document.body.classList.add('unlocked');document.getElementById('airplane').disabled=false;document.getElementById('lock').style.display='none';showControl();}if(e.data?.type==='BERAY_RELOCK'){unlocked=false;document.body.classList.remove('unlocked');document.getElementById('airplane').disabled=true;hideControl();document.getElementById('lock').style.display='flex';}});
 let startY=0,startX=0;
@@ -27,12 +42,29 @@ function start(e){const t=e.touches?e.touches[0]:e;startY=t.clientY;startX=t.cli
 function end(e){const t=e.changedTouches?e.changedTouches[0]:e;const dy=t.clientY-startY;if(Math.abs(dy)<60||Math.abs(t.clientX-startX)>90)return;if(control.classList.contains('open')){if(dy< -45)hideControl();return;}if(dy< -45)showControl();else if(dy>45)parentSend('BERAY_UNLOCK')}
 lock.addEventListener('touchstart',start,{passive:true});lock.addEventListener('touchend',end,{passive:true});lock.addEventListener('mousedown',start);lock.addEventListener('mouseup',end);
 document.querySelectorAll('[data-radio]').forEach(b=>b.addEventListener('click',async()=>{
- const radio=b.dataset.radio;if(radio==='airplane'&&!unlocked){toast('Uçak modu kilit ekranında kullanılamaz.');return;}
- const bridge=window.berayHardware||parent.berayHardware;if(!bridge){toast('Beray donanım sürücüsü bağlı değil. Bu ekrandan Android ayarları açılmaz.');return;}
- try{let result;if(radio==='wifi'&&bridge.scanWifi){result=await bridge.scanWifi();toast(Array.isArray(result)?(result.length+' Wi-Fi ağı bulundu'):'Wi-Fi taraması tamamlandı');}
- else if(radio==='bluetooth'&&bridge.scanBluetooth){result=await bridge.scanBluetooth();toast('Bluetooth taraması tamamlandı');}
- else if(bridge.toggleRadio){result=await bridge.toggleRadio(radio);b.classList.toggle('active',!!result);toast((b.querySelector('strong').textContent)+(result?' açıldı':' kapatıldı'));}
- else toast('Bu donanım işlemi için Beray OS sürücüsü gerekli.');
+ const radio=b.dataset.radio;
+ if(radio==='airplane'&&!unlocked){toast('Uçak modu kilit ekranında kullanılamaz.');return;}
+ const bridge=window.berayHardware||parent.berayHardware;
+ if(!bridge){toast('Beray donanım sürücüsü bağlı değil. Android ayarları açılmayacak.');return;}
+ try{
+   if(radio==='wifi'||radio==='bluetooth'){
+     if(typeof bridge.toggleRadio==='function'){
+       const enabled=(await bridge.toggleRadio(radio))===true;
+       b.classList.toggle('active',enabled);
+       b.querySelector('small').textContent=enabled?'Açık · taranıyor':'Kapalı';
+       if(!enabled){document.getElementById('scanResults').classList.add('hidden');toast(b.querySelector('strong').textContent+' kapatıldı');return;}
+     }
+     const scan=radio==='wifi'?bridge.scanWifi:bridge.scanBluetooth;
+     if(typeof scan!=='function'){toast('Bu tarama için Beray OS sürücüsü gerekli.');return;}
+     const items=await scan.call(bridge);showScanResults(radio,items);
+     toast((Array.isArray(items)?items.length:0)+(radio==='wifi'?' Wi-Fi ağı bulundu':' Bluetooth cihazı bulundu'));return;
+   }
+   if(typeof bridge.toggleRadio==='function'){
+     const enabled=(await bridge.toggleRadio(radio))===true;
+     b.classList.toggle('active',enabled);
+     b.querySelector('small').textContent=enabled?'Açık':'Kapalı';
+     toast(b.querySelector('strong').textContent+(enabled?' açıldı':' kapatıldı'));
+   }else toast('Bu donanım işlemi için Beray OS sürücüsü gerekli.');
  }catch(err){toast('Donanım işlemi başarısız: '+(err.message||'sürücü hatası'));}
 }));
 </script></body></html>
