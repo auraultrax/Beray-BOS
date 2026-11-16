@@ -2,7 +2,7 @@
  const $=s=>document.querySelector(s),toast=$('#toast'),lock=$('#lockStage'),stage=$('#appStage'),frame=$('#appFrame');
  let publications=[];
  function notify(message){toast.textContent=message;toast.classList.add('show');clearTimeout(notify.t);notify.t=setTimeout(()=>toast.classList.remove('show'),2600);}
- function openPage(page){frame.src=page;stage.classList.add('open');}
+ function openPage(page){const builtIn=/^index[1-4]\\.html(?:[?#]|$)/.test(page);frame.setAttribute('sandbox',builtIn?'allow-scripts allow-forms allow-same-origin allow-popups':'allow-scripts allow-forms allow-pointer-lock allow-popups allow-downloads');frame.src=page;stage.classList.add('open');}
  function openPublished(row){if(!row||!row.public_base_url){notify('Uygulama henüz yayımlanmamış.');return;}openPage(row.public_base_url);}
  function showHome(){stage.classList.remove('open');frame.src='about:blank';}
  window.addEventListener('message',e=>{
@@ -10,7 +10,7 @@
    if(e.data?.type==='BERAY_UNLOCK'){lock.style.display='none';notify('Beray hazır. Hoş geldin.');}
    if(e.data?.type==='BERAY_GO_HOME')showHome();
  });
- document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>openPage(b.dataset.page)));
+ document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>openPage(b.dataset.page)));\n $('#appBack').addEventListener('click',showHome);
  $('#lockNow').addEventListener('click',()=>{stage.classList.remove('open');lock.style.display='block';lock.querySelector('iframe').contentWindow.location.reload();});
  function tick(){const d=new Date();$('#homeClock').textContent=d.toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'})+' · '+d.toLocaleDateString('tr-TR',{day:'numeric',month:'short'});}
  tick();setInterval(tick,15000);
@@ -29,7 +29,7 @@
    document.querySelectorAll('#coreApps .app-tile').forEach(x=>x.style.display=(x.textContent.toLowerCase().includes(term)?'flex':'none'));
    const matches=publications.filter(x=>(x.project_name+' '+x.slug+' '+x.kind).toLowerCase().includes(term));
    host.innerHTML='';
-   matches.forEach(item=>{const b=document.createElement('button');b.className='custom-app';b.innerHTML='<span class="app-letter"></span><span><strong></strong><small></small></span>';b.querySelector('.app-letter').textContent=item.kind==='app'?'B':'W';b.querySelector('strong').textContent=item.project_name;b.querySelector('small').textContent=(item.kind==='app'?'BSTORE uygulaması':'BYSAM sitesi')+' · v'+item.version;b.onclick=()=>openPublished(item);host.appendChild(b);});
+   matches.forEach(item=>{const card=document.createElement('div');card.className='custom-result';const icon=document.createElement('span');icon.className='app-letter';icon.textContent=item.kind==='app'?'B':'W';const meta=document.createElement('div');meta.className='custom-result-meta';const title=document.createElement('strong');title.textContent=item.project_name;const sub=document.createElement('small');sub.textContent=(item.kind==='app'?'BSTORE uygulaması':'BYSAM sitesi')+' · v'+item.version;meta.append(title,sub);const actions=document.createElement('div');actions.className='custom-result-actions';const open=document.createElement('button');open.className='mini-action';open.textContent='Aç';open.onclick=()=>openPublished(item);actions.append(open);if(item.kind==='app'){const install=document.createElement('button');install.className='mini-action primary';const already=installed().some(x=>x.id===item.id);install.textContent=already?'Eklendi':'Ana ekrana ekle';install.disabled=already;install.onclick=()=>{window.BerayOS.install(item);install.textContent='Eklendi';install.disabled=true;};actions.append(install);}card.append(icon,meta,actions);host.appendChild(card);});
    const own=installed().filter(x=>(x.project_name+' '+x.slug).toLowerCase().includes(term));
    own.forEach(item=>{if(matches.some(x=>x.id===item.id))return;const b=document.createElement('button');b.className='custom-app';b.textContent=item.project_name;b.onclick=()=>openPublished(item);host.appendChild(b);});
    if(!matches.length&&!own.length&&document.querySelectorAll('#coreApps .app-tile[style*="display: none"]').length===4)host.innerHTML='<p style="color:#8da0b9;grid-column:1/-1">Sonuç bulunamadı.</p>';
